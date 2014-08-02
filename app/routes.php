@@ -25,14 +25,13 @@ Route::group(array('prefix' => 'users'), function()
     Route::any('logout',        	array('as' => 'parts.users.logout',		'uses' => 'T4KControllers\Users\UsersController@logout'));
 });
 
-/**
- * Module Dashboard
- * @namespace T4KControllers\Dashboard
- */
-Route::any('/',             		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
-Route::any('dashboard',     		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
-
 Route::group(array('before' => 'auth'), function()
 {
-    
+	/**
+	 * Module Dashboard
+	 * @namespace T4KControllers\Dashboard
+	 */
+	Route::any('/',             		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
+	Route::any('dashboard',     		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
+	
 });

@@ -65,8 +65,6 @@
                     <li class="hidden-xs"><p class="navbar-text">Bonjour, <strong><?php echo Auth::user()->first_name; ?></strong>!</p></li>
                     <li<?php echo (@$activeScreen == 'ProfileIndex') ? ' class="active"' : ''; ?>><a href="http://portail.team3990.com/users/profile" target="_blank"><i class="fa fa-user fa-fw"></i> Mon compte</a></li>
                     <li><a href="<?php echo route('parts.users.logout'); ?>"><i class="fa fa-power-off fa-fw"></i> Se déconnecter</a></li>
-                    <?php else : ?>
-                    <li><a href="<?php echo route('parts.users.login'); ?>"><i class="fa fa-sign-in fa-fw"></i> Se connecter</a>
                     <?php endif; ?>
                     <li class="dropdown hidden-xs">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-th fa-fw"></i> <i class="fa fa-caret-down fa-fw"></i></a>

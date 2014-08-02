@@ -44,11 +44,11 @@ class UsersController extends \BaseController
 	{
 	    if (Auth::attempt(array('email' => Input::get('email'), 'password' => Input::get('password')))) 
 	    {
-	        return Redirect::intended(route('academy.courses.index'));
+	        return Redirect::intended(route('parts.dashboard.index'));
 	    } 
 	    else 
 	    {
-	        return Redirect::route('academy.users.login')->with('authenticated', false)->withInput();
+	        return Redirect::route('parts.users.login')->with('authenticated', false)->withInput();
 	    }
 	}
 	
@@ -59,7 +59,7 @@ class UsersController extends \BaseController
 	public function logout()
 	{
 	    Auth::logout();
-	    return Redirect::route('academy.dashboard.index');
+	    return Redirect::route('parts.users.login');
 	}
 
 }
