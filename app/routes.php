@@ -34,4 +34,20 @@ Route::group(array('before' => 'auth'), function()
 	Route::any('/',             		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
 	Route::any('dashboard',     		array('as' => 'parts.dashboard.index',	'uses' => 'T4KControllers\Dashboard\DashboardController@index'));
 	
+	/**
+	 * Module Projects
+	 * @namespace T4KControllers\Projects
+	 */
+	Route::group(array('prefix' => 'projets'), function()
+	{
+		Route::any('/',                     array('as' => 'parts.projects.index',		'uses' => 'T4KControllers\Projects\ProjectsController@index'));
+		Route::any('afficher/{id}',         array('as' => 'parts.projects.view',      	'uses' => 'T4KControllers\Projects\ProjectsController@view'));
+		Route::any('ajouter',               array('as' => 'parts.projects.create',    	'uses' => 'T4KControllers\Projects\ProjectsController@create'));
+		Route::any('ajouter/save',          array('as' => 'parts.projects.store',     	'uses' => 'T4KControllers\Projects\ProjectsController@store'));
+		Route::any('modifier/{id}',         array('as' => 'parts.projects.edit',      	'uses' => 'T4KControllers\Projects\ProjectsController@edit'));
+		Route::any('modifier/save/{id}',    array('as' => 'parts.projects.update',    	'uses' => 'T4KControllers\Projects\ProjectsController@update'));
+		Route::any('supprimer/{id}',        array('as' => 'parts.projects.destroy',   	'uses' => 'T4KControllers\Projects\ProjectsController@destroy'));
+	});
+	
+	
 });
