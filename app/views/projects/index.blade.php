@@ -119,7 +119,7 @@
 	                        </div>
 	                    <?php endif; ?>
 	                    
-            			<h4><?php echo count($project->assemblies); ?> <?php echo (count($project->assemblies) > 1) ? 'assemblages' : 'assemblage'; ?> dans ce projet</h4>
+            			<h4><?php echo count($project->assemblies); ?> <?php echo (count($project->assemblies) > 1) ? 'assemblages' : 'assemblage'; ?> dans le projet <span class="bg-info"><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></span></h4>
             			
             			<div class="row">
 			                <div class="col-xs-12">
@@ -134,10 +134,10 @@
             			<table class="table table-hover">
             				<thead>
             					<tr>
-            						<th>Nom de l'assemblage</th>
+            						<th style="width: 200px;">Nom de l'assemblage</th>
             						<th>Description</th>
-            						<th>Code</th>
-            						<th>Gestionnaire d'assemblage</th>
+            						<th style="width: 150px;">Code</th>
+            						<th style="width: 200px;">Gestionnaire d'assemblage</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
             						<?php endif; ?>
@@ -146,9 +146,9 @@
             				<tbody>
             					<?php foreach ($project->assemblies as $assembly) : ?>
             					<tr>
-            						<td><a href="<?php echo route('parts.assemblies.view', $assembly->id); ?>"><?php echo $assembly->title; ?></a></td>
-            						<td><?php echo $assembly->desc; ?></td>
-            						<td><kbd>CRA-<?php echo $assembly->code; ?></kbd></td>
+            						<td><a href="<?php echo route('parts.assemblies.view', $assembly->id); ?>"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></a></td>
+            						<td class="small"><?php echo $assembly->desc; ?></td>
+            						<td><kbd>CRA-<?php echo $assembly->code; ?>0000</kbd></td>
             						<td><i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>
@@ -225,7 +225,7 @@
 	            		<table class="table table-hover">
 	            			<thead>
 	            				<tr>
-	            					<th>Nom</th>
+	            					<th style="width: 200px;">Nom du projet</th>
 	            					<th>Description</th>
 	            					<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
 	            					<th style="width: 200px">Actions</th>
@@ -235,8 +235,8 @@
 	            			<tbody>
 	            				<?php foreach ($projects as $project) : ?>
 	            				<tr>
-	            					<td><a href="<?php echo route('parts.projects.view', $project->id); ?>"><?php echo $project->title; ?></a></td>
-	            					<td><?php echo $project->desc; ?></td>
+	            					<td><a href="<?php echo route('parts.projects.view', $project->id); ?>"><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></a></td>
+	            					<td class="small"><?php echo $project->desc; ?></td>
 	            					<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
 	            					<td>
 	            						<a href="<?php echo route('parts.projects.edit', $project->id); ?>" class="btn btn-default btn-xs"><i class="fa fa-pencil fa-fw"></i> Modifier</a> 

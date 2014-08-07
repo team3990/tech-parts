@@ -120,7 +120,7 @@
 	                        </div>
 	                    <?php endif; ?>
 	                    
-            			<h4><?php echo count($assembly->subassemblies); ?> <?php echo (count($assembly->subassemblies) > 1) ? 'sous-assemblages' : 'sous-assemblage'; ?> dans ce projet</h4>
+            			<h4><?php echo count($assembly->subassemblies); ?> <?php echo (count($assembly->subassemblies) > 1) ? 'sous-assemblages' : 'sous-assemblage'; ?> dans l'assemblage <span class="bg-info"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></span></h4>
             			
             			<div class="row">
 			                <div class="col-xs-12">
@@ -135,9 +135,9 @@
             			<table class="table table-hover">
             				<thead>
             					<tr>
-            						<th>Nom du sous-assemblage</th>
+            						<th style="width: 200px;">Nom du sous-assemblage</th>
             						<th>Description</th>
-            						<th>Code</th>
+            						<th style="width: 100px;">Code</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
             						<?php endif; ?>
