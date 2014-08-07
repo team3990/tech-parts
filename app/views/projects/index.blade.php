@@ -27,9 +27,18 @@
         @section('content')
             <div class="row">
                 <div class="col-xs-12">
+                
+                	<ol class="breadcrumb">
+						<li<?php echo ($currentRoute == 'parts.projects.view') ? '' : ' class="active"' ?>><a href="<?php echo route('parts.projects.index'); ?>">Projets</a></li>
+						<?php if ($currentRoute == 'parts.projects.view') : ?>
+						<li class="active"><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></li>
+						<?php endif; ?>
+					</ol>
+					
                     <div class="page-header">
-                        <h1><i class="fa fa-briefcase fa-fw"></i> Projets <small><?php echo ($currentRoute == 'parts.projects.view') ? 'Voir un projet' : 'Tous les projets'; ?></small></h1>
+                        <h1><i class="fa fa-briefcase fa-fw"></i> <?php echo ($currentRoute == 'parts.projects.view') ? $project->title.' <small>'.$project->desc.'</small>' : 'Projets <small>Tous les projets</small>'; ?></h1>
                     </div>
+                    
                 </div>
             </div>
             
@@ -38,16 +47,12 @@
 	                <div class="col-xs-12">
 	                    <div class="btn-toolbar" role="toolbar">
 	                    	
-	                    	<div class="btn-group">
-	                    		<a href="<?php echo route('parts.projects.index'); ?>" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Retourner à la liste des projets</a>
-	                    	</div>
-	                    	
 	                        <?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
 	                        <div class="btn-group">
 	                            <a href="<?php echo route('parts.projects.edit', $project->id); ?>" class="btn btn-default"><i class="fa fa-pencil-square-o fa-fw"></i> Modifier le projet</a>
                             </div>
                             <div class="btn-group">
-	                            <button class="btn btn-default" data-toggle="modal" data-target="#modal-destroy-<?php echo $project->id; ?>"><i class="fa fa-trash-o fa-fw"></i> Supprimer</button>
+	                            <button class="btn btn-default" data-toggle="modal" data-target="#modal-destroy-<?php echo $project->id; ?>"><i class="fa fa-trash-o fa-fw"></i> Supprimer le projet</button>
 	                        </div>
 	                        <div class="modal fade" id="modal-destroy-<?php echo $project->id; ?>" tabindex="-1" role="dialog">
 	                            <div class="modal-dialog">
@@ -114,10 +119,6 @@
 	                        </div>
 	                    <?php endif; ?>
 	                    
-            			<h3><?php echo $project->title; ?></h3>
-            			<p class="lead"><?php echo $project->desc; ?></p>
-            			
-            			<hr />
             			<h4><?php echo count($project->assemblies); ?> <?php echo (count($project->assemblies) > 1) ? 'assemblages' : 'assemblage'; ?> dans ce projet</h4>
             			
             			<div class="row">
@@ -145,9 +146,9 @@
             				<tbody>
             					<?php foreach ($project->assemblies as $assembly) : ?>
             					<tr>
-            						<td><?php echo $assembly->title; ?></td>
+            						<td><a href="<?php echo route('parts.assemblies.view', $assembly->id); ?>"><?php echo $assembly->title; ?></a></td>
             						<td><?php echo $assembly->desc; ?></td>
-            						<td><?php echo $assembly->code; ?></td>
+            						<td><kbd>CRA-<?php echo $assembly->code; ?></kbd></td>
             						<td><i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>

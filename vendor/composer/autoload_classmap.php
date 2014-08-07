@@ -1576,6 +1576,7 @@ return array(
     'T4KHelpers' => $baseDir . '/app/libraries/T4KHelpers.php',
     'T4KModels\\Assembly' => $baseDir . '/app/models/Assembly.php',
     'T4KModels\\Project' => $baseDir . '/app/models/Project.php',
+    'T4KModels\\Subassembly' => $baseDir . '/app/models/Subassembly.php',
     'T4KModels\\User' => $baseDir . '/app/models/User.php',
     'T4KModels\\UserRole' => $baseDir . '/app/models/UserRole.php',
     'TestCase' => $baseDir . '/app/tests/TestCase.php',

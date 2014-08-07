@@ -56,7 +56,7 @@
                                     <button type="submit" class="btn btn-warning" ><i class="fa fa-save fa-fw"></i> <?php echo ($currentRoute == 'parts.assemblies.create') ? 'Ajouter l\'assemblage' : 'Enregistrer les modifications'; ?></button>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="<?php echo ($currentRoute == 'parts.assemblies.create') ? route('parts.projects.view', $project->id) : route('parts.projects.view', $project->id); ?>" class="btn btn-default"><i class="fa fa-times fa-fw"></i> Annuler</a>
+                                    <a href="<?php echo ($currentRoute == 'parts.assemblies.create') ? route('parts.projects.view', $project->id) : route('parts.assemblies.view', $assembly->id); ?>" class="btn btn-default"><i class="fa fa-times fa-fw"></i> Annuler</a>
                                 </div>
                             </div>
                         </div>
