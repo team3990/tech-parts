@@ -45,11 +45,9 @@ class Project extends \Eloquent
      * Relationship to Assembly model.
      * @return Eloquent Relationship
      */
-    /*
     public function assemblies()
     {
     	return $this->hasMany('\T4KModels\Assembly')->orderBy('code')->orderBy('title');
     }
-    */
     
 }

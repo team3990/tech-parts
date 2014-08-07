@@ -104,16 +104,38 @@
 	                        </div>
 	                    <?php endif; ?>
 	                    
+	                    <?php if (Session::has('destroy') && Session::get('destroy') == true) : ?>
+	                        <div class="alert alert-success alert-dismissable fade in">
+	                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                            <i class="fa fa-check-circle fa-fw fa-3x pull-left"></i>
+	                            <div style="margin-left: 70px">
+	                                <h4>Assemblage supprimé</h4> L'assemblage &laquo; <strong><?php echo strip_tags(Session::get('object_name')); ?></strong> &raquo; a été supprimé avec succès.
+	                            </div>
+	                        </div>
+	                    <?php endif; ?>
+	                    
             			<h3><?php echo $project->title; ?></h3>
             			<p class="lead"><?php echo $project->desc; ?></p>
+            			
             			<hr />
-            			<h4>Assemblage(s) dans ce projet</h4>
+            			<h4><?php echo count($project->assemblies); ?> <?php echo (count($project->assemblies) > 1) ? 'assemblages' : 'assemblage'; ?> dans ce projet</h4>
+            			
+            			<div class="row">
+			                <div class="col-xs-12">
+			                    <div class="btn-toolbar" role="toolbar">
+			                        <div class="btn-group">
+			                            <a href="<?php echo route('parts.assemblies.create', $project->id); ?>" class="btn btn-default"><i class="fa fa-plus fa-fw"></i> Ajouter un assemblage</a>
+			                        </div>
+			                    </div>
+			                </div>
+			            </div>
+	            
             			<table class="table table-hover">
             				<thead>
             					<tr>
             						<th>Nom de l'assemblage</th>
             						<th>Description</th>
-            						<th>Nomenclature</th>
+            						<th>Code</th>
             						<th>Gestionnaire d'assemblage</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
@@ -121,20 +143,48 @@
             					</tr>
             				</thead>
             				<tbody>
-            					<?php /* foreach ($project->assemblies as $assembly) : ?>
+            					<?php foreach ($project->assemblies as $assembly) : ?>
             					<tr>
             						<td><?php echo $assembly->title; ?></td>
             						<td><?php echo $assembly->desc; ?></td>
             						<td><?php echo $assembly->code; ?></td>
-            						<td></td>
+            						<td><i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>
-            							<a href="#" class="btn btn-sm"><i class="fa fa-pencil fa-fw"></i></a> 
-	            						<a href="#" class="btn btn-sm"><i class="fa fa-trash-o fa-fw"></i></a>
+            							<a href="<?php echo route('parts.assemblies.edit', $assembly->id); ?>" class="btn btn-default btn-xs"><i class="fa fa-pencil fa-fw"></i> Modifier</a> 
+	            						<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-destroy-assembly-<?php echo $assembly->id; ?>"><i class="fa fa-trash-o fa-fw"></i> Supprimer</button>
+				                        <div class="modal fade" id="modal-destroy-assembly-<?php echo $assembly->id; ?>" tabindex="-1" role="dialog">
+				                            <div class="modal-dialog">
+				                                <div class="modal-content">
+				                                    <div class="modal-header">
+				                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				                                        <h4 class="modal-title" id="myModalLabel">Supprimer un assemblage</h4>
+				                                    </div>
+				                                    <div class="modal-body">
+				                                        <div class="panel panel-default">
+				                                            <div class="panel-body">
+				                                                <i class="fa fa-cubes fa-fw fa-3x pull-left"></i>
+				                                                <div style="margin-left: 70px">
+				                                                    <h4 style="margin-top: 0"><?php echo $assembly->title; ?></h4>
+				                                                    <?php echo $assembly->desc; ?><br />
+				                                                    Responsable: <i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?><br />
+				                                                    Code d'assemblage: <?php echo $assembly->code; ?>
+				                                                </div>
+				                                            </div>
+				                                        </div>
+				                                        <div class="text-danger text-center"><strong>Êtes-vous sûr de vouloir supprimer cet assemblage?</strong></div>
+				                                    </div>
+				                                    <div class="modal-footer">
+				                                        <a href="<?php echo route('parts.assemblies.destroy', $assembly->id); ?>" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i> Supprimer</a>
+				                                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times-circle fa-fw"></i> Annuler</button>
+				                                    </div>
+				                                </div>
+				                            </div>
+				                        </div>
             						</td>
             						<?php endif; ?>
             					</tr>
-            					<?php endforeach; */ ?>
+            					<?php endforeach; ?>
             				</tbody>
             			</table>
             			<?php if (count($project->assemblies) == 0) : ?>

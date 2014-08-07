@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
 
 /**
- * T4KControllers\Dashboard\DashboardController class
+ * T4KControllers\Projects\ProjectsController class
  * @author 		minhnhatbui
  * @copyright 	2014 Équipe Team 3990: Tech for Kids (Collège Regina Assumpta, Montréal, QC)
  * @abstract 	View Controller managing projects with the Project model.
