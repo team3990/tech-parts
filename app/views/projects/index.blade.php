@@ -36,7 +36,7 @@
 					</ol>
 					
                     <div class="page-header">
-                        <h1><i class="fa fa-briefcase fa-fw"></i> <?php echo ($currentRoute == 'parts.projects.view') ? $project->title.' <small>'.$project->desc.'</small>' : 'Projets <small>Tous les projets</small>'; ?></h1>
+                        <h1><i class="fa fa-briefcase fa-fw"></i> <?php echo ($currentRoute == 'parts.projects.view') ? $project->title.' <br /><small>'.$project->desc.'</small>' : 'Projets <small>Tous les projets</small>'; ?></h1>
                     </div>
                     
                 </div>
@@ -148,7 +148,7 @@
             					<tr>
             						<td><a href="<?php echo route('parts.assemblies.view', $assembly->id); ?>"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></a></td>
             						<td class="small"><?php echo $assembly->desc; ?></td>
-            						<td><kbd>CRA-<?php echo $assembly->code; ?>0000</kbd></td>
+            						<td><kbd><?php echo $assembly->nomenclature; ?></kbd></td>
             						<td><i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>
@@ -166,10 +166,10 @@
 				                                            <div class="panel-body">
 				                                                <i class="fa fa-cubes fa-fw fa-3x pull-left"></i>
 				                                                <div style="margin-left: 70px">
-				                                                    <h4 style="margin-top: 0"><?php echo $assembly->title; ?></h4>
+				                                                    <h4 style="margin-top: 0"><kbd><?php echo $assembly->nomenclature; ?></kbd> <?php echo $assembly->title; ?></h4>
 				                                                    <?php echo $assembly->desc; ?><br />
 				                                                    Responsable: <i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?><br />
-				                                                    Code d'assemblage: <?php echo $assembly->code; ?>
+				                                                    Dans <strong class="bg-info"><i class="fa fa-briefcase fa-fw"></i> <?php echo $assembly->project->title; ?></strong>
 				                                                </div>
 				                                            </div>
 				                                        </div>
@@ -189,7 +189,7 @@
             				</tbody>
             			</table>
             			<?php if (count($project->assemblies) == 0) : ?>
-	            			<div class="alert alert-warning text-center">Aucun assemblage disponible dans ce projet pour le moment.</div>
+	            			<div class="alert alert-warning text-center">Aucun assemblage disponible dans le projet <strong class="bg-info"><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></strong> pour le moment.</div>
 						<?php endif; ?>
             		</div>
             	</div>

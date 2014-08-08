@@ -6,7 +6,7 @@
         
         {{-- HTML Header Section --}}
         @section('title')
-            Assemblages
+            Sous-assemblages
         @stop
         
         @section('stylesheets')
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-header">
-                        <h1><i class="fa fa-cubes fa-fw"></i> Assemblages <small><?php echo ($currentRoute == 'parts.assemblies.create') ? 'Ajouter' : 'Modifier'; ?> un assemblage</small></h1>
+                        <h1><i class="fa fa-cube fa-fw"></i> Sous-assemblages <small><?php echo ($currentRoute == 'parts.subassemblies.create') ? 'Ajouter' : 'Modifier'; ?> un sous-assemblage</small></h1>
                     </div>
                 </div>
             </div>
@@ -42,21 +42,21 @@
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <i class="fa fa-exclamation-circle fa-fw fa-3x pull-left"></i>
                         <div style="margin-left: 70px">
-                            <h4>Oups!</h4> L'assemblage n'a pu être <?php echo ($currentRoute == 'parts.assemblies.create') ? 'ajouté' : 'modifié'; ?>. Les erreurs suivants se sont produits:
+                            <h4>Oups!</h4> Le sous-assemblage n'a pu être <?php echo ($currentRoute == 'parts.subassemblies.create') ? 'ajouté' : 'modifié'; ?>. Les erreurs suivants se sont produits:
                             <?php echo HTML::ul($errors->all()); ?>
                         </div>
                     </div>
                 <?php endif; ?>
             
-                <?php echo ($currentRoute == 'parts.assemblies.create') ? Form::open(array('route' => 'parts.assemblies.store')) : Form::model($assembly, array('route' => array('parts.assemblies.update', $assembly->id))); ?>
+                <?php echo ($currentRoute == 'parts.subassemblies.create') ? Form::open(array('route' => 'parts.subassemblies.store')) : Form::model($subassembly, array('route' => array('parts.subassemblies.update', $subassembly->id))); ?>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="btn-toolbar" role="toolbar">
                                 <div class="btn-group">
-                                    <button type="submit" class="btn btn-warning" ><i class="fa fa-save fa-fw"></i> <?php echo ($currentRoute == 'parts.assemblies.create') ? 'Ajouter l\'assemblage' : 'Enregistrer les modifications'; ?></button>
+                                    <button type="submit" class="btn btn-warning" ><i class="fa fa-save fa-fw"></i> <?php echo ($currentRoute == 'parts.subassemblies.create') ? 'Ajouter l\'assemblage' : 'Enregistrer les modifications'; ?></button>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="<?php echo ($currentRoute == 'parts.assemblies.create') ? route('parts.projects.view', $project->id) : route('parts.assemblies.view', $assembly->id); ?>" class="btn btn-default"><i class="fa fa-times fa-fw"></i> Annuler</a>
+                                    <a href="<?php echo ($currentRoute == 'parts.subassemblies.create') ? route('parts.assemblies.view', $assembly->id) : route('parts.subassemblies.view', $subassembly->id); ?>" class="btn btn-default"><i class="fa fa-times fa-fw"></i> Annuler</a>
                                 </div>
                             </div>
                         </div>
@@ -74,35 +74,28 @@
                                         <div class="panel-body">
                                             <dl>
                                             	
-                                                <dt><label>Nom de l'assemblage</label></dt>
-                                                <dd><?php echo Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Nom de l\'assemblage...', 'id' => 'title')); ?></dd>
+                                                <dt><label>Nom du sous-assemblage</label></dt>
+                                                <dd><?php echo Form::text('title', null, array('class' => 'form-control', 'placeholder' => 'Nom du sous-assemblage...', 'id' => 'title')); ?></dd>
                                                 
-                                                <dt><label>Gestionnaire de l'assemblage</label></dt>
-                                                <dd>
-                                                	<?php $managers_array = array('Élèves' => array(), 'Mentors et apprentis mentors' => array()); 
-                                                	foreach ($managers as $manager) 
-													{
-														if ($manager->is_mentor || $manager->is_junior_mentor) 	$managers_array['Mentors et apprentis mentors'][$manager->id] = $manager->full_name;
-														if ($manager->is_student) 								$managers_array['Élèves'][$manager->id] = $manager->full_name;
-													}
-													?>
-                                                	<?php echo Form::select('manager_id', $managers_array, 1, array('class' => 'form-control', 'id' => 'manager_id')); ?>
-                                                </dd>
-                                                
-                                                <dt><label>Code de l'assemblage</label></dt>
+                                                <dt><label>Code du sous-assemblage</label></dt>
                                                 <dd>
                                                 	<div class="input-group col-xs-3">
-                                                		<span class="input-group-addon">CRA-</span>
-                                                		<?php echo Form::text('code', null, array('class' => 'form-control text-center', 'placeholder' => 'X', 'id' => 'code', 'maxlength' => '1')); ?>
-                                                		<span class="input-group-addon">0000</span>
+                                                		<span class="input-group-addon">CRA-<?php echo $assembly->code; ?></span>
+                                                		<?php echo Form::text('code', null, array('class' => 'form-control text-center', 'placeholder' => '00', 'id' => 'code', 'maxlength' => '2')); ?>
+                                                		<span class="input-group-addon">00</span>
                                                 	</div>
                                                 </dd>
                                                 
                                                 <dt><label>Description</label></dt>
-                                                <dd><?php echo Form::textarea('desc', null, array('class' => 'form-control', 'placeholder' => 'Description de l\'assemblage...', 'id' => 'desc')); ?></dd>
+                                                <dd><?php echo Form::textarea('desc', null, array('class' => 'form-control', 'placeholder' => 'Description du sous-assemblage...', 'id' => 'desc')); ?></dd>
                                                 
-                                                <dt><label>Dans le projet</label></dt>
-                                                <dd><?php echo Form::hidden('project_id', $project->id); ?><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></dd>
+                                                <dt><label>Dans l'assemblage</label></dt>
+                                                <dd>
+                                                	<?php echo Form::hidden('assembly_id', $assembly->id); ?>
+                                                	<span class="bg-info"><i class="fa fa-briefcase fa-fw"></i> <?php echo $project->title; ?></span> 
+                                                	<i class="fa fa-angle-right fa-fw"></i> 
+                                                	<span class="bg-info"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></span>
+                                                </dd>
                                                 
                                             </dl>
                                         </div>

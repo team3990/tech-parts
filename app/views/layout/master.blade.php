@@ -57,7 +57,7 @@
             
                 <ul class="nav navbar-nav">
                 	<?php if (Auth::check()) : ?>
-                	<li<?php echo (@$activeScreen == 'ProjectsIndex') ? ' class="active"' : ''; ?>><a href="<?php echo route('parts.projects.index'); ?>"><i class="fa fa-briefcase fa-fw"></i> Projets</a></li>
+                	<li<?php echo (@$activeScreen == 'ProjectsIndex' || @$activeScreen == 'AssembliesIndex' || @$activeScreen == 'SubassembliesIndex') ? ' class="active"' : ''; ?>><a href="<?php echo route('parts.projects.index'); ?>"><i class="fa fa-briefcase fa-fw"></i> Projets</a></li>
                 	<?php endif; ?>
                 </ul>
                 

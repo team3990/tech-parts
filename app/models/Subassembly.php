@@ -30,7 +30,7 @@ class Subassembly extends \Eloquent
     public static $rules = array(
         	'title'             => 'required',
     		'desc'				=> 'required',
-    		'code'				=> 'required|max:1|alpha'
+    		'code'				=> 'required|max:2|digits:2'
     );
     
     /**
@@ -38,11 +38,11 @@ class Subassembly extends \Eloquent
      * @var array
      */
     public static $messages = array(
-        	'title.required'    => 'Le nom de l\'assemblage est requis.',
-    		'desc.required'		=> 'La description de l\'assemblage est requise.',
-    		'code.required'		=> 'Le code de l\'assemblage est requis.',
-    		'code.max'			=> 'Le code de l\'assemblage doit être une seule lettre aphabétique.',
-    		'code.alpha'		=> 'Le code de l\'assemblage doit être une lettre aphabétique, excluant les lettres I et O.'
+        	'title.required'    => 'Le nom du sous-assemblage est requis.',
+    		'desc.required'		=> 'La description du sous-assemblage est requise.',
+    		'code.required'		=> 'Le code du sous-assemblage est requis.',
+    		'code.digits'		=> 'Le code du sous-assemblage doit être composé uniquement de caractères numériques.',
+    		'code.max'			=> 'Le code du sous-assemblage doit être composé de deux chiffres entre 01 et 99.'
     );
     
     /**
@@ -52,6 +52,24 @@ class Subassembly extends \Eloquent
     public function assembly()
     {
     	return $this->belongsTo('\T4KModels\Assembly');
+    }
+    
+    /**
+     * Relationship to Part model.
+     * @return Eloquent Relationship
+     */
+    public function pieces()
+    {
+    	return $this->hasMany('\T4KModels\Piece')->orderBy('code')->orderBy('title');
+    }
+    
+    /**
+     * Attribute: nomenclature
+     * @return string
+     */
+    public function getNomenclatureAttribute()
+    {
+    	return 'CRA-'.$this->assembly->code.$this->code.'00';
     }
     
 }

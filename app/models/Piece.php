@@ -3,20 +3,20 @@
 namespace T4KModels;
 
 /**
- * T4KModels\Assembly class
+ * T4KModels\Piece class
  * @author      minhnhatbui
  * @copyright   2014 Équipe Team 3990: Tech for Kids (Collège Regina Assumpta, Montréal, QC)
- * @abstract    Model Controller managing assemblies.
+ * @abstract    Model Controller managing parts.
  */
 
-class Assembly extends \Eloquent
+class Piece extends \Eloquent
 {
     
     /**
      * The database table used by the model.
      * @var string
      */
-    protected $table = 't4kprt_assemblies';
+    protected $table = 't4kprt_pieces';
     
     /**
      * Enable model soft deleting functionality.
@@ -49,27 +49,9 @@ class Assembly extends \Eloquent
      * Relationship to Project model.
      * @return Eloquent Relationship
      */
-    public function project()
+    public function subassembly()
     {
-    	return $this->belongsTo('\T4KModels\Project');
-    }
-    
-    /**
-     * Relationship to User model.
-     * @return Eloquent Relationship
-     */
-    public function manager()
-    {
-    	return $this->belongsTo('\T4KModels\User', 'manager_id', 'id');
-    }
-    
-    /**
-     * Relationship to Subassembly model.
-     * @return Eloquent Relationship
-     */
-    public function subassemblies()
-    {
-    	return $this->hasMany('\T4KModels\Subassembly')->orderBy('code')->orderBy('title');
+    	return $this->belongsTo('\T4KModels\Subassembly');
     }
     
     /**
@@ -78,7 +60,7 @@ class Assembly extends \Eloquent
      */
     public function getNomenclatureAttribute()
     {
-    	return 'CRA-'.$this->code.'0000';
+    	return 'CRA-'.$this->subassembly->assembly->code.$this->subassembly->code.$this->code;
     }
     
 }

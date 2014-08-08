@@ -63,4 +63,19 @@ Route::group(array('before' => 'auth'), function()
 		Route::any('modifier/{id}/save',    array('as' => 'parts.assemblies.update',    'uses' => 'T4KControllers\Assemblies\AssembliesController@update'));
 		Route::any('supprimer/{id}',        array('as' => 'parts.assemblies.destroy',   'uses' => 'T4KControllers\Assemblies\AssembliesController@destroy'));
 	});
+	
+	/**
+	 * Module Subassemblies
+	 * @namespace T4KControllers\Subassemblies
+	 */
+	Route::group(array('prefix' => 'subassemblies'), function()
+	{
+		Route::any('/',                     array('as' => 'parts.subassemblies.index',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@index'));
+		Route::any('afficher/{id}',         array('as' => 'parts.subassemblies.view',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@view'));
+		Route::any('ajouter/{id}',          array('as' => 'parts.subassemblies.create',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@create'));
+		Route::any('ajouter/{id}/save',     array('as' => 'parts.subassemblies.store',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@store'));
+		Route::any('modifier/{id}',         array('as' => 'parts.subassemblies.edit',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@edit'));
+		Route::any('modifier/{id}/save',    array('as' => 'parts.subassemblies.update',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@update'));
+		Route::any('supprimer/{id}',        array('as' => 'parts.subassemblies.destroy','uses' => 'T4KControllers\Subassemblies\SubassembliesController@destroy'));
+	});
 });
