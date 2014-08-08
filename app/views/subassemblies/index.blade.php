@@ -35,6 +35,8 @@
 						<li class="active"><i class="fa fa-cube fa-fw"></i> <?php echo $subassembly->title; ?></li>
 					</ol>
 					
+					<span class="pull-right text-muted">Gestionnaire d'assemblage: <i class="fa fa-user fa-fw"></i> <?php echo $subassembly->assembly->manager->full_name; ?></span>
+					
                     <div class="page-header">
                         <h1>
                         	<i class="fa fa-cube fa-fw"></i> 
@@ -150,7 +152,7 @@
             					<?php foreach ($subassembly->pieces as $piece) : ?>
             					<tr>
             						<td><a href="<?php // echo route('parts.assemblies.view', $piece->id); ?>"><?php echo $piece->title; ?></a></td>
-            						<td><?php echo $piece->desc; ?></td>
+            						<td class="small"><?php echo $piece->desc; ?></td>
             						<td><kbd><?php echo $piece->nomenclature; ?></kbd></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>

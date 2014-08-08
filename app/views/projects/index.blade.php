@@ -134,9 +134,9 @@
             			<table class="table table-hover">
             				<thead>
             					<tr>
+            						<th class="text-center" style="width: 100px;">Code</th>
             						<th style="width: 200px;">Nom de l'assemblage</th>
             						<th>Description</th>
-            						<th style="width: 150px;">Code</th>
             						<th style="width: 200px;">Gestionnaire d'assemblage</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
@@ -146,9 +146,9 @@
             				<tbody>
             					<?php foreach ($project->assemblies as $assembly) : ?>
             					<tr>
+            						<td class="text-center"><kbd><?php echo $assembly->nomenclature; ?></kbd></td>
             						<td><a href="<?php echo route('parts.assemblies.view', $assembly->id); ?>"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></a></td>
             						<td class="small"><?php echo $assembly->desc; ?></td>
-            						<td><kbd><?php echo $assembly->nomenclature; ?></kbd></td>
             						<td><i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>

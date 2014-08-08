@@ -34,6 +34,8 @@
 						<li class="active"><i class="fa fa-cubes fa-fw"></i> <?php echo $assembly->title; ?></li>
 					</ol>
 					
+					<span class="pull-right text-muted">Gestionnaire d'assemblage: <i class="fa fa-user fa-fw"></i> <?php echo $assembly->manager->full_name; ?></span>
+					
                     <div class="page-header">
                         <h1>
                         	<i class="fa fa-cubes fa-fw"></i> 
@@ -136,9 +138,9 @@
             			<table class="table table-hover">
             				<thead>
             					<tr>
+            						<th class="text-center" style="width: 100px;">Code</th>
             						<th style="width: 200px;">Nom du sous-assemblage</th>
             						<th>Description</th>
-            						<th style="width: 100px;">Code</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
             						<?php endif; ?>
@@ -147,9 +149,9 @@
             				<tbody>
             					<?php foreach ($assembly->subassemblies as $subassembly) : ?>
             					<tr>
+            						<td class="text-center"><kbd><?php echo $subassembly->nomenclature; ?></kbd></td>
             						<td><a href="<?php echo route('parts.subassemblies.view', $subassembly->id); ?>"><i class="fa fa-cube fa-fw"></i> <?php echo $subassembly->title; ?></a></td>
-            						<td><?php echo $subassembly->desc; ?></td>
-            						<td><kbd><?php echo $subassembly->nomenclature; ?></kbd></td>
+            						<td class="small"><?php echo $subassembly->desc; ?></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>
             							<a href="<?php echo route('parts.subassemblies.edit', $subassembly->id); ?>" class="btn btn-default btn-xs"><i class="fa fa-pencil fa-fw"></i> Modifier</a> 
