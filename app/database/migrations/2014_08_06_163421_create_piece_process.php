@@ -12,7 +12,7 @@ class CreatePieceProcess extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('t4kprt_piece_process', function(Blueprint $table)
+		Schema::table('t4kprt_process', function(Blueprint $table)
 		{
 			// Create table
 		    $table->create();
@@ -20,7 +20,7 @@ class CreatePieceProcess extends Migration {
 		    // Table schema
 		    $table->increments('id');
 			$table->text('title');
-			$table->text('desc');
+			$table->text('hexcolor');
 					     
 		    // Table administration
 		    $table->timestamps();
@@ -35,7 +35,7 @@ class CreatePieceProcess extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('t4kprt_piece_process', function(Blueprint $table)
+		Schema::table('t4kprt_process', function(Blueprint $table)
 		{
 			// Undo changes
 			$table->drop();

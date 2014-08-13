@@ -50,6 +50,10 @@
 				<div class="row">
 	                <div class="col-xs-12">
 	                    <div class="btn-toolbar" role="toolbar">
+	                    
+	                    	<div class="btn-group">
+	                    		<a href="<?php echo route('parts.projects.view', $assembly->project->id); ?>" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Retourner au projet</a>
+	                    	</div>
 	                    	
 	                        <div class="btn-group">
 	                            <a href="<?php echo route('parts.assemblies.edit', $assembly->id); ?>" class="btn btn-default"><i class="fa fa-pencil-square-o fa-fw"></i> Modifier l'assemblage</a>

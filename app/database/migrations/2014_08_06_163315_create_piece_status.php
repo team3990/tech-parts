@@ -12,7 +12,7 @@ class CreatePieceStatus extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('t4kprt_piece_status', function(Blueprint $table)
+		Schema::table('t4kprt_status', function(Blueprint $table)
 		{
 			// Create table
 		    $table->create();
@@ -35,7 +35,7 @@ class CreatePieceStatus extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('t4kprt_piece_status', function(Blueprint $table)
+		Schema::table('t4kprt_status', function(Blueprint $table)
 		{
 			// Undo changes
 			$table->drop();

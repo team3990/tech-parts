@@ -51,6 +51,10 @@
 				<div class="row">
 	                <div class="col-xs-12">
 	                    <div class="btn-toolbar" role="toolbar">
+	                    
+	                    	<div class="btn-group">
+	                    		<a href="<?php echo route('parts.assemblies.view', $subassembly->assembly->id); ?>" class="btn btn-default"><i class="fa fa-arrow-circle-left fa-fw"></i> Retourner à l'assemblage</a>
+	                    	</div>
 	                    	
 	                        <div class="btn-group">
 	                            <a href="<?php echo route('parts.subassemblies.edit', $subassembly->id); ?>" class="btn btn-default"><i class="fa fa-pencil-square-o fa-fw"></i> Modifier le sous-assemblage</a>
@@ -125,13 +129,18 @@
 	                        </div>
 	                    <?php endif; ?>
 	                    
-            			<h4><?php echo count($subassembly->parts); ?> <?php echo (count($subassembly->parts) > 1) ? 'pièces' : 'pièce'; ?> dans le sous-assemblage <span class="bg-info"><i class="fa fa-cube fa-fw"></i> <?php echo $subassembly->title; ?></span></h4>
+            			<h4><?php echo count($subassembly->pieces); ?> <?php echo (count($subassembly->pieces) > 1) ? 'pièces' : 'pièce'; ?> dans le sous-assemblage <span class="bg-info"><i class="fa fa-cube fa-fw"></i> <?php echo $subassembly->title; ?></span></h4>
             			
             			<div class="row">
 			                <div class="col-xs-12">
 			                    <div class="btn-toolbar" role="toolbar">
-			                        <div class="btn-group">
-			                            <a href="<?php // echo route('parts.assemblies.create', $project->id); ?>" class="btn btn-default"><i class="fa fa-plus fa-fw"></i> Ajouter une pièce</a>
+			                    	<div class="btn-group">
+			                    		<a class="btn disabled">Ajouter une pièce de type : </a>
+		                    		</div>
+		                    		<div class="btn-group">
+				                    	<?php foreach ($pieces_types as $piece_type) : ?>
+				                            <a href="<?php echo route('parts.pieces.create', array($subassembly->id, $piece_type->id)); ?>" class="btn btn-default"><i class="fa fa-plus fa-fw"></i> <span class="label label-default"><?php echo str_pad($piece_type->id, 2, '0', STR_PAD_LEFT); ?></span> <?php echo $piece_type->title; ?></a>
+				                        <?php endforeach; ?>
 			                        </div>
 			                    </div>
 			                </div>
@@ -140,9 +149,10 @@
             			<table class="table table-hover">
             				<thead>
             					<tr>
+            						<th style="width: 100px;">Code</th>
             						<th style="width: 200px;">Nom de la pièce</th>
             						<th>Description</th>
-            						<th style="width: 100px;">Code</th>
+            						<th class="text-center">Type</th>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<th style="width: 200px">Actions</th>
             						<?php endif; ?>
@@ -151,9 +161,10 @@
             				<tbody>
             					<?php foreach ($subassembly->pieces as $piece) : ?>
             					<tr>
-            						<td><a href="<?php // echo route('parts.assemblies.view', $piece->id); ?>"><?php echo $piece->title; ?></a></td>
-            						<td class="small"><?php echo $piece->desc; ?></td>
             						<td><kbd><?php echo $piece->nomenclature; ?></kbd></td>
+            						<td><a href="<?php echo route('parts.pieces.view', $piece->id); ?>"><i class="fa fa-cog fa-fw"></i> <?php echo $piece->title; ?></a></td>
+            						<td class="small"><?php echo $piece->desc; ?></td>
+            						<td class="text-center"><span class="label label-default"><?php echo str_pad($piece->type->id, 2, '0', STR_PAD_LEFT); ?></span></td>
             						<?php if (Auth::user()->is_mentor || Auth::user()->is_junior_mentor) : ?>
             						<td>
             							<a href="<?php echo route('parts.assemblies.edit', $piece->id); ?>" class="btn btn-default btn-xs"><i class="fa fa-pencil fa-fw"></i> Modifier</a> 

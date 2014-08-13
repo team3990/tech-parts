@@ -53,7 +53,7 @@ Route::group(array('before' => 'auth'), function()
 	 * Module Assemblies
 	 * @namespace T4KControllers\Assemblies
 	 */
-	Route::group(array('prefix' => 'assemblies'), function()
+	Route::group(array('prefix' => 'assemblages'), function()
 	{
 		Route::any('/',                     array('as' => 'parts.assemblies.index',		'uses' => 'T4KControllers\Assemblies\AssembliesController@index'));
 		Route::any('afficher/{id}',         array('as' => 'parts.assemblies.view',      'uses' => 'T4KControllers\Assemblies\AssembliesController@view'));
@@ -68,7 +68,7 @@ Route::group(array('before' => 'auth'), function()
 	 * Module Subassemblies
 	 * @namespace T4KControllers\Subassemblies
 	 */
-	Route::group(array('prefix' => 'subassemblies'), function()
+	Route::group(array('prefix' => 'sousassemblages'), function()
 	{
 		Route::any('/',                     array('as' => 'parts.subassemblies.index',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@index'));
 		Route::any('afficher/{id}',         array('as' => 'parts.subassemblies.view',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@view'));
@@ -77,5 +77,20 @@ Route::group(array('before' => 'auth'), function()
 		Route::any('modifier/{id}',         array('as' => 'parts.subassemblies.edit',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@edit'));
 		Route::any('modifier/{id}/save',    array('as' => 'parts.subassemblies.update',	'uses' => 'T4KControllers\Subassemblies\SubassembliesController@update'));
 		Route::any('supprimer/{id}',        array('as' => 'parts.subassemblies.destroy','uses' => 'T4KControllers\Subassemblies\SubassembliesController@destroy'));
+	});
+	
+	/**
+	 * Module Pieces
+	 * @namespace T4KControllers\Pieces
+	 */
+	Route::group(array('prefix' => 'pieces'), function()
+	{
+		Route::any('/',                     array('as' => 'parts.pieces.index',			'uses' => 'T4KControllers\Pieces\PiecesController@index'));
+		Route::any('afficher/{id}',         array('as' => 'parts.pieces.view',			'uses' => 'T4KControllers\Pieces\PiecesController@view'));
+		Route::any('ajouter/{sub_id}/{type_id}',		array('as' => 'parts.pieces.create',		'uses' => 'T4KControllers\Pieces\PiecesController@create'));
+		Route::any('ajouter/{sub_id}/{type_id}/save',	array('as' => 'parts.pieces.store',			'uses' => 'T4KControllers\Pieces\PiecesController@store'));
+		Route::any('modifier/{id}',         array('as' => 'parts.pieces.edit',			'uses' => 'T4KControllers\Pieces\PiecesController@edit'));
+		Route::any('modifier/{id}/save',    array('as' => 'parts.pieces.update',		'uses' => 'T4KControllers\Pieces\PiecesController@update'));
+		Route::any('supprimer/{id}',        array('as' => 'parts.pieces.destroy',		'uses' => 'T4KControllers\Pieces\PiecesController@destroy'));
 	});
 });

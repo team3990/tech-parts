@@ -58,10 +58,14 @@ class SubassembliesController extends \BaseController {
 	{
 		// Retrieve a subassembly with its id
 		$subassembly = \T4KModels\Subassembly::find($id);
+		
+		// Retrieve pieces types
+		$pieces_types = \T4KModels\PieceType::get();
 	
 		// Array of data to send to view
 		$data = array(
 				'subassembly'       => $subassembly,
+				'pieces_types'		=> $pieces_types,
 				'currentRoute'  	=> Route::currentRouteName(),
 				'activeScreen'  	=> 'SubassembliesIndex'
 		);

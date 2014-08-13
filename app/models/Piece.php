@@ -24,13 +24,19 @@ class Piece extends \Eloquent
     use \SoftDeletingTrait;
     
     /**
+     * File upload path.
+     * @var string
+     */
+    protected $upload_path = '/files/pieces/';
+    
+    /**
      * The set of rules to be validated when creating the initial administrator account.
      * @var array
      */
     public static $rules = array(
         	'title'             => 'required',
     		'desc'				=> 'required',
-    		'code'				=> 'required|max:1|alpha'
+    		'code'				=> 'required|digits:2'
     );
     
     /**
@@ -41,8 +47,7 @@ class Piece extends \Eloquent
         	'title.required'    => 'Le nom de l\'assemblage est requis.',
     		'desc.required'		=> 'La description de l\'assemblage est requise.',
     		'code.required'		=> 'Le code de l\'assemblage est requis.',
-    		'code.max'			=> 'Le code de l\'assemblage doit être une seule lettre aphabétique.',
-    		'code.alpha'		=> 'Le code de l\'assemblage doit être une lettre aphabétique, excluant les lettres I et O.'
+    		'code.digits'		=> 'Le code de l\'assemblage doit être composé de deux chiffres de 0 à 9.'
     );
     
     /**
@@ -55,12 +60,66 @@ class Piece extends \Eloquent
     }
     
     /**
+     * Relationship to PieceType model.
+     * @return Eloquent Relationship
+     */
+    public function type()
+    {
+    	return $this->belongsTo('\T4KModels\PieceType', 'piece_type_id', 'id');
+    }
+    
+    /**
+     * Relationship to User model.
+     * @return Eloquent Relationship
+     */
+    public function author()
+    {
+    	return $this->belongsTo('\T4KModels\User', 'author_id', 'id');
+    }
+    
+    /**
+     * Relationship to Provider model.
+     * @return Eloquent Relationship
+     */
+    public function provider()
+    {
+    	return $this->belongsTo('\T4KModels\Provider', 'provider_id', 'id');
+    }
+        
+    /**
      * Attribute: nomenclature
      * @return string
      */
     public function getNomenclatureAttribute()
     {
     	return 'CRA-'.$this->subassembly->assembly->code.$this->subassembly->code.$this->code;
+    }
+    
+    /**
+     * Attribute: invoice file.
+     * @return string
+     */
+    public function getInvoicePathAttribute()
+    {
+    	return $this->upload_path.$this->id.'/'.$this->invoice;
+    }
+    
+    /**
+     * Attribute: quote file.
+     * @return string
+     */
+    public function getQuotePathAttribute()
+    {
+    	return $this->upload_path.$this->id.'/'.$this->quote;
+    }
+    
+    /**
+     * Attribute: technical drawing file.
+     * @return string
+     */
+    public function getTechnicalDrawingPathAttribute()
+    {
+    	return $this->upload_path.$this->id.'/'.$this->technical_drawing;
     }
     
 }

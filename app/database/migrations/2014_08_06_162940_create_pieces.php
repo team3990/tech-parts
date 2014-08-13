@@ -21,9 +21,7 @@ class CreatePieces extends Migration {
 		    $table->increments('id');
 			$table->integer('subassembly_id')->unsigned();
 			$table->integer('piece_type_id')->unsigned();
-			$table->integer('piece_status_id')->unsigned();
-			$table->integer('piece_process_id')->unsigned();
-			$table->integer('author_id')->unsigned();
+			$table->integer('author_id')->unsigned()->nullable();
 			$table->integer('provider_id')->unsigned()->nullable();
 
 			$table->dateTime('datetime_due');
@@ -38,7 +36,7 @@ class CreatePieces extends Migration {
 			$table->text('desc');
 			$table->text('code');
 			$table->text('material')->nullable();
-			$table->float('unit_price')->unsigned();
+			$table->float('unit_price')->unsigned()->nullable();
 			$table->float('quantity')->unsigned();
 			$table->text('invoice')->nullable();
 			$table->text('quote')->nullable();
