@@ -58,6 +58,9 @@
                 <ul class="nav navbar-nav">
                 	<?php if (Auth::check()) : ?>
                 	<li<?php echo (@$activeScreen == 'ProjectsIndex' || @$activeScreen == 'AssembliesIndex' || @$activeScreen == 'SubassembliesIndex' || @$activeScreen == 'PiecesIndex') ? ' class="active"' : ''; ?>><a href="<?php echo route('parts.projects.index'); ?>"><i class="fa fa-briefcase fa-fw"></i> Projets</a></li>
+                	<li<?php echo (@$activeScreen == 'ReportsIndex') ? ' class="active"' : ''; ?>><a href="<?php // echo route('parts.projects.index'); ?>"><i class="fa fa-bar-chart-o fa-fw"></i> Rapports et vues</a></li>
+                	<li<?php echo (@$activeScreen == 'ProvidersIndex') ? ' class="active"' : ''; ?>><a href="<?php // echo route('parts.projects.index'); ?>"><i class="fa fa-barcode fa-fw"></i> Catalogue</a></li>
+                	<li<?php echo (@$activeScreen == 'SearchIndex') ? ' class="active"' : ''; ?>><a href="<?php // echo route('parts.projects.index'); ?>"><i class="fa fa-search fa-fw"></i> Rechercher</a></li>
                 	<?php endif; ?>
                 </ul>
                 
@@ -73,7 +76,7 @@
                             <li class="dropdown-header">Applications pour élèves et mentors</li>
                             <li><a href="http://portail.team3990.com" target="_blank"><i class="fa fa-cube fa-fw"></i> Tech Portail</a></li>
                             <li class="disabled"><a href="#"><i class="fa fa-briefcase fa-fw"></i> Tech Projets</a></li>
-                            <li class="disabled"><a href="#"><i class="fa fa-cog fa-fw"></i> Tech Parts</a></li>
+                            <li><a href="http://parts.team3990.com"><i class="fa fa-cog fa-fw"></i> Tech Parts</a></li>
                             <li class="disabled"><a href="#"><i class="fa fa-bug fa-fw"></i> Tech Incidents</a></li>
                             <li><a href="http://wiki.team3990.com" target="_blank"><i class="fa fa-book fa-fw"></i> Tech Wiki</a></li>
                             <li><a href="https://my.usfirst.org/stims/" target="_blank"><i class="fa fa-globe fa-fw"></i> STIMS</a></li>
@@ -96,7 +99,7 @@
                             <li class="dropdown-header">Applications pour élèves et mentors</li>
                             <li><a href="http://portail.team3990.com"><i class="fa fa-cube fa-fw"></i> Tech Portail</a></li>
                             <li class="disabled"><a href="#"><i class="fa fa-briefcase fa-fw"></i> Tech Projets</a></li>
-                            <li class="disabled"><a href="#"><i class="fa fa-cog fa-fw"></i> Tech Parts</a></li>
+                            <li><a href="http://parts.team3990.com"><i class="fa fa-cog fa-fw"></i> Tech Parts</a></li>
                             <li class="disabled"><a href="#"><i class="fa fa-bug fa-fw"></i> Tech Incidents</a></li>
                             <li><a href="http://wiki.team3990.com"><i class="fa fa-book fa-fw"></i> Tech Wiki</a></li>
                             <li><a href="https://my.usfirst.org/stims/" target="_blank"><i class="fa fa-globe fa-fw"></i> STIMS</a></li>
