@@ -34,6 +34,7 @@
         @parent
     
         @section('content')
+        	
             <div class="row">
                 <div class="col-lg-12">
                     <div class="page-header">
@@ -66,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         
                         <div class="col-sm-6 col-xs-12">
@@ -258,17 +259,17 @@
                                                 <dt><label for="invoice">Facture</label></dt>
                                                 <dd>
                                                 	<?php echo (empty($piece->invoice)) ? '<em class="text-muted">Aucun fichier disponible.</em>' : '<a href="'.url($piece->invoice_path).'" target="_blank"><i class="fa fa-cloud-download fa-fw"></i> '.$piece->invoice.'</a>'; ?>
-		                                        	<?php echo ($piece->invoice == NULL) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->invoice_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
+		                                        	<?php echo (empty($piece->invoice)) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->invoice_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
 		                                        	<div class="small text-muted" style="margin-top: 10px"><?php echo (empty($piece->invoice)) ? 'Sélectionnez un fichier PDF:' : 'Sélectionnez un autre fichier pour remplacer le fichier existant:'; ?></div>
                                                 	<?php echo Form::file('invoice', array('id' => 'invoice')); ?>
                                                 </dd>
                                                 <?php endif; ?>
-                                                
+
                                                 <?php if (in_array($piece_type->id, array(2))) : ?>
                                                 <dt><label for="quote">Soumission du fournisseur</label></dt>
                                                 <dd>
                                                 	<?php echo (empty($piece->quote)) ? '<em class="text-muted">Aucun fichier disponible.</em>' : '<a href="'.url($piece->quote_path).'" target="_blank"><i class="fa fa-cloud-download fa-fw"></i> '.$piece->quote.'</a>'; ?>
-		                                        	<?php echo ($piece->quote == NULL) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->quote_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
+		                                        	<?php echo (empty($piece->quote)) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->quote_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
 		                                        	<div class="small text-muted" style="margin-top: 10px"><?php echo (empty($piece->quote)) ? 'Sélectionnez un fichier PDF:' : 'Sélectionnez un autre fichier pour remplacer le fichier existant:'; ?></div>
                                                 	<?php echo Form::file('quote', array('id' => 'quote')); ?>
                                                 </dd>
@@ -280,7 +281,7 @@
                                                 </dt>
                                                 <dd>
                                                 	<?php echo (empty($piece->technical_drawing)) ? '<em class="text-muted">Aucun fichier disponible.</em>' : '<a href="'.url($piece->technical_drawing_path).'" target="_blank"><i class="fa fa-cloud-download fa-fw"></i> '.$piece->technical_drawing.'</a>'; ?>
-                                                	<?php echo ($piece->technical_drawing == NULL) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->technical_drawing_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
+                                                	<?php echo (empty($piece->technical_drawing)) ? '' : '<span class="text-muted">('.number_format(round(File::size(public_path().$piece->technical_drawing_path) / 1024), 0, ',', ' ').' Ko)</span>'; ?>
 		                                        	<div class="small text-muted" style="margin-top: 10px"><?php echo (empty($piece->technical_drawing)) ? 'Sélectionnez un fichier PDF:' : 'Sélectionnez un autre fichier pour remplacer le fichier existant:'; ?></div>
                                                 	<?php echo Form::file('technical_drawing', array('id' => 'technical_drawing')); ?>
                                                 </dd>
@@ -289,7 +290,7 @@
                                                 <dt><label for="external_link">Lien Web de la pièce</label></dt>
                                                 <dd><?php echo Form::text('external_link', null, array('class' => 'form-control', 'placeholder' => 'Lien Web de la pièce...', 'id' => 'external_link')); ?></dd>
                                                 <?php endif; ?>
-                                                
+
                                             </dl>
                                         </div>
                                     </div>
@@ -299,11 +300,7 @@
                         
                     </div>
                 <?php echo Form::close(); ?>
-                
-                <script type="text/javascript">
-                $('.toggle-tooltip').tooltip({container: 'body'});
-                </script>
-                
+                                
         @stop
         
     @stop
@@ -318,6 +315,10 @@
     
         @section('scripts_eof')
             @parent
+            <script type="text/javascript">
+            	$('.toggle-tooltip').tooltip({container: 'body'});
+            </script>
+                
             <script type="text/javascript">
             
             $(function() {

@@ -151,7 +151,7 @@ class PiecesController extends \BaseController {
 			$piece->subassembly_id		= Input::get('subassembly_id');
 			$piece->piece_type_id		= Input::get('piece_type_id');
 			$piece->author_id			= Input::get('author_id');
-			if (!is_scalar(Input::get('provider_id')))
+			if (!is_scalar(Input::get('provider_id')) && !empty(Input::get('provider_id')))
 			{
 				$provider = new \T4KModels\Provider;
 				$provider->title = Input::get('provider_id');

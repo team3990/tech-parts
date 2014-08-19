@@ -11,6 +11,14 @@
         
         @section('stylesheets')
             @parent
+            <style type="text/css">
+            	.dl-horizontal dt {
+            		width: 240px;
+            	}
+            	.dl-horizontal dd {
+            		margin-left: 260px;
+            	}
+            </style>
         @stop
         
         @section('scripts_header')
@@ -127,15 +135,12 @@
             	
             	<div class="row">
                         
-                       	<div class="col-sm-6 col-xs-12">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#form-info" role="tab" data-toggle="tab"><i class="fa fa-folder-open-o fa-fw"></i> Informations</a></li>
-                            </ul>
+                       	<div class="col-sm-8 col-xs-12">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="form-info">
-                                    <div class="panel panel-default panel-tabs">
+                                    <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <dl>
+                                            <dl class="dl-horizontal">
                                             	
                                                 <dt><label for="title">Nom de la pièce</label></dt>
                                                 <dd><?php echo (empty($piece->title)) ? '<em class="text-muted">Aucun nom.</em>' : $piece->title; ?></dd>
@@ -162,23 +167,6 @@
                                                 	<i class="fa fa-angle-right fa-fw"></i> 
                                                 	<span class="bg-info"><i class="fa fa-cube fa-fw"></i> <?php echo $piece->subassembly->title; ?></span> 
                                                 </dd>
-                                                
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6 col-xs-12">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li class="active"><a href="#form-info" role="tab" data-toggle="tab"><i class="fa fa-cog fa-fw"></i> <span class="label label-default"><?php echo str_pad($piece->type->id, 2, '0', STR_PAD_LEFT); ?></span> <?php echo $piece->type->title; ?></a></li>
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="form-info">
-                                    <div class="panel panel-default panel-tabs">
-                                        <div class="panel-body">
-                                            <dl>
                                                 
                                                 <?php if (in_array($piece->type->id, array(2, 3))) : ?>
                                                 <dt><label for="provider_id">Fournisseur</label></dt>
@@ -257,6 +245,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="col-sm-4 col-xs-12">
+                        	
                         </div>
                         
                     </div>
