@@ -85,6 +85,15 @@ class Piece extends \Eloquent
     {
     	return $this->belongsTo('\T4KModels\Provider', 'provider_id', 'id');
     }
+    
+    /**
+     * Relationship to Process model.
+     * @return Eloquent Relationship
+     */
+    public function processes()
+    {
+    	return $this->hasMany('\T4KModels\PieceProcess', 'process_id', 'piece_id');
+    }
         
     /**
      * Attribute: nomenclature

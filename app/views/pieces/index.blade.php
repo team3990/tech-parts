@@ -248,7 +248,7 @@
                         </div>
                         
                         <div class="col-sm-4 col-xs-12">
-                        	
+                        	<pre><?php print_r($piece->processes); ?></pre>
                         </div>
                         
                     </div>
